@@ -1,0 +1,22 @@
+.navbarDiv {
+    display: flex;
+    background-color: royalblue;
+    color: white;
+    justify-content:space-between;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.navbarSpan {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    color: yellow;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.linkDiv {
+    text-decoration: none;
+}

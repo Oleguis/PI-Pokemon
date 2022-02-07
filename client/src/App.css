@@ -1,38 +1,126 @@
-.App {
-  text-align: center;
+.body{
+    border: 0;
+    padding: 0;
+    margin: 0;
+    background-color: royalblue;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.divInicio{
+    width: 99vw;
+    height: 97vh;
+    background-color: royalblue;
+    display: flex;
+    position: relative;
+    /* background-image: url(./assets/img/allpokemon13.jpg); */
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    align-items: center;
+    justify-content: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.Leyendo {
+    display: flex;
+    position: relative;
+    background-color: white;
+    top:50%;
+    left: 100%;
+    opacity: 0.7;
+    border-radius: 15%;
+    /* animation: loading 5s linear infinite; */
+    animation: loading 5s linear infinite alternate-reverse;
+    /* filter: brightness(5); */
+    /* mix-blend-mode: multiply;     */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@keyframes loading {
+    0%   {background-color:red; left:100%;}
+    25%  {background-color:yellow; left:200%;}
+    50%  {background-color:blue; left:300%;}
+    75%  {background-color:green; left:400%;}
+    100% {background-color:red; left:500%;}
 }
 
-.App-link {
-  color: #61dafb;
+.elaborado {
+    display: bloc;
+    width: 20%;
+    height: 25%;
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    background-color: #f7f709 ;
+    background-size: cover;
+    border-radius: 5%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.5rem;
+    color: #181515;
+    object-fit: cover;
+    opacity: 0.9;
+    border: 2em solid royalblue;
+    filter: brightness(1.1);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.pokeLetras {
+    display: flex;
+    position: absolute;
+    bottom: 80px;
+    right: cacl(50% / 2);
+    border-radius: 5%;
+    width: auto;
+    height: auto;
+    max-width:40%;
+    max-height: 30%;
+}
+
+.pokeLetras:hover {
+    opacity: 0.6;
+    max-width: 37%;
+    max-height: 28%;
+    /* bottom: 120px;
+    right: calc(100% / 2); */
+}
+
+.ocultar {
+    display: none;
+}
+
+.message{
+    display
+    : flex;
+    position: absolute;
+    bottom: 0;
+    right: calc(10vw);
+    color: white;
+    font-size: calc(2rem);
+}
+
+.divPrincipal {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 98vw;
+    height: 97vh;
+}
+
+.divNav {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-content: center;
+    width: 100%;
+    height: 10%;
+    background-color: royalblue;
+}
+
+.contenedorCards {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 90%;
+    background-image: url('../src/assets/img/allpokemon20.jpg');
+    background-size: cover;
+    background-position: top;
+    /* min-height: 500px; */
+    /* background-attachment: local; */
+    /* background-repeat: repeat; */
 }

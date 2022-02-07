@@ -1,0 +1,203 @@
+:root {
+    --pcolor: royalblue;
+    --scolor: yellow;
+    --dcolor: white;
+}
+
+#flying	{ 
+    --pcolor: #7ae7c7; 
+    --dcolor: black;
+}
+#ice{
+     --pcolor: #afeafd; 
+     --dcolor: black;
+    }
+#bug{
+     --pcolor: #a2faa3; 
+     --dcolor: black;
+}
+#fairy{
+     --pcolor: #90ee90; 
+     --dcolor: black;
+}
+#electric{
+     --pcolor: #ffea70; 
+     --dcolor: black;
+}
+#steel{ --pcolor: #1d8a99; }
+#normal { --pcolor:#b09398 }
+#fighting { --pcolor: #2f2f2f; }
+#poison	{ --pcolor:#795663; }
+#ground	{ --pcolor:#d2b074;}
+#rock{ --pcolor: #999799; }
+#ghost{ --pcolor: #561d25; }
+#fire{ --pcolor: #ff675c; }
+#water{ --pcolor: #0596c7; }
+#grass{ --pcolor: #4a9681; }
+#psychic{ --pcolor: #ffc6d9; }
+#dragon{ --pcolor: #da627d; }
+#dark{ --pcolor: #a9a9a9; }
+#unknown{ --pcolor: #4169e1; }
+#shadow{ --pcolor: #4947479a; }
+#default{ --pcolor: #7ae7c7; }
+
+.flying	{ 
+    --scolor: #7ae7c7; 
+    --dcolor: black;
+}
+.ice{ 
+    --scolor: #afeafd; 
+    --dcolor: black;
+}
+.bug{ 
+    --scolor: #a2faa3; 
+    --dcolor: black;
+}
+.fairy{ 
+    --scolor: #90ee90; 
+    --dcolor: black;
+}
+.electric{ 
+    --scolor: #ffea70; 
+    --dcolor: black;
+}
+.fighting { --scolor: #2f2f2f; }
+.normal { --scolor:#b09398 }
+.poison	{ --scolor:#795663; }
+.ground	{ --scolor:#d2b074;}
+.rock{ --scolor: #999799; }
+.ghost{ --scolor: #561d25; }
+.steel{ --scolor: #1d8a99; }
+.fire{ --scolor: #ff675c; }
+.water{ --scolor: #0596c7; }
+.grass{ --scolor: #4a9681; }
+.psychic{ --scolor: #ffc6d9; }
+.dragon{ --scolor: #da627d; }
+.dark{ --scolor: #a9a9a9; }
+.unknown{ --scolor: #4169e1; }
+.shadow{ --scolor: #4947479a; }
+.default{ --scolor: #7ae7c7; }
+
+
+#divInner {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: royalblue;
+}
+
+.divFrontal {
+    /* display: flex; */
+    /* position: absolute; */
+    /* top: 0;
+    left: 0;
+    flex-direction: column; */
+    padding: 5px;
+    width: 150px;
+    height: 220px;
+    border: 0.2rem solid yellow;
+    margin: 10px 7px;
+    border-radius: 10px;
+    text-align: center;
+    justify-content:right;
+    background: darkcyan url('../../assets/img/allpokemon16.jpg');
+    background-size: cover;
+    background-blend-mode: multiply;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    z-index: 2;
+}
+
+.divFrontal:hover {
+    transform: rotateY(180deg);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.divFrontal  img {
+    display: flex;
+    width: 100px;
+    height: 100px;
+    max-width: 120%;
+    max-height: 120%;
+    background: radial-gradient(var(--scolor) 33%, var(--pcolor) 33%);
+    background-size: 5% 5%;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.divFrontal h3 {
+    margin: 3px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.divFrontal  h4 {
+    color: white;
+    font-weight: bold;
+    margin: 0;
+    /* padding: 2px 0; */
+}
+
+#h4id {
+    background-color: white;
+    color: black;
+    border-radius: 15%;
+    width: 50px;
+    height: 20px;
+    text-align: center;
+}
+
+.moType2 {
+    display: none;
+}
+.divTipos{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.Type1 {
+    width: 70px;
+    height: 22px;
+    color: var(--dcolor);
+    font-weight: bold;
+    background-color: var(--pcolor);
+    border-radius: 20%;
+    margin: 0px 5px;
+
+}
+
+.Type2 {
+    width: 70px;
+    height: 22px;
+    color: var(--dcolor);
+    font-weight: bold;
+    background-color: var(--scolor);
+    border-radius: 20%;
+    margin: 0px 5px;
+}
+
+/* ************************ Cara anversa *************************************** */
+
+.divAnverso {
+    display: flex;
+    position:absolute;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #2980b9;
+    top: 0;
+    left: 0;
+    color: white;
+    transform: rotateY(180deg);
+    border-radius: 10%;
+    border: 0.5rem solid yellow;
+    padding: 5px;
+    width: 150px;
+    height: 220px;
+    border: 0.2rem solid yellow;
+    margin: 10px 7px;
+    border-radius: 10px;
+    text-align: center;
+    justify-content:right;
+}
