@@ -12,8 +12,6 @@ function sumChars(string){
 
 router.get('/', async (req, res, next) => {
     try {
-        // console.log('\n---------- req ------------\n',req)
-        // console.log('\n---------- params ------------\n',req.params , '\n---------- body ------------\n',req.body, '\n---------- query ------------\n',req.query)
         if(req.query.name){
             let nombreRecibido = req.query.name.toLowerCase();
             let seekPokemondb = Pokemons.findOne({
