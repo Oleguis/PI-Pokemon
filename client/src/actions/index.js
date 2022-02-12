@@ -11,11 +11,23 @@ export const AGREGAR_POKEMON = 'agregar_pokemon'
 export const ELIMINAR_POKEMON = 'eliminar_pokemon'
 
 
+
+export const loadind_Data = (estado) => {
+	return (dispatch) => {
+		return dispatch({ type: 'LOADING_DATA', payload: estado })
+	}
+}
+
+
 export const buscar_pokemones = (offset=0,limit=40,llenar=false) => {
-        return async (dispatch) => {
-				const lista = await axios(`http://localhost:3001/api/pokemon`, { offset, limit, llenar });
-				return dispatch({ type: 'BUSCAR_POKEMONES', payload: lista.data });
-        }
+	return async (dispatch) => {
+		try {
+			const lista = await axios.get(`http://localhost:3001/api/pokemon`, { data: {offset, limit, llenar}});
+			return dispatch({ type: 'BUSCAR_POKEMONES', payload: lista.data });				
+		} catch (error) {
+				alert(error);
+		}
+    }
 }
 
 export const detalle_pokemon = (pokemonId=25) => {
@@ -25,33 +37,25 @@ export const detalle_pokemon = (pokemonId=25) => {
 			const pokemonDetail = await axios(`http://localhost:3001/api/pokemon/${pokemonId}`);
 			dispatch({ type: 'BUSCAR_POKEMONES', payload: pokemonDetail });
 		} catch (error) {
-			throw new Error(error);
+			alert(error);
+			// throw new Error(error);
+		}
+	}
+}
+
+export const buscar_tipos = () => {
+	return async (dispatch) => {
+		try {			
+			const lista = await axios(`http://localhost:3001/api/tipos`);
+			return dispatch({ type: 'BUSCAR_TIPOS', payload: lista.data });
+		} catch (error) {
+			alert(error);
 		}
 	}
 }
 
 
-// export function getMovies(titulo) {
-// 	return function(dispatch) {
-// 		return fetch(`http://www.omdbapi.com/?apikey=aa5c2844&s=${titulo}`)
-// 			.then( response => response.json() )
-// 			.then( json => dispatch( { type: 'GET_MOVIES', payload: json } ) );
-// 	};
-// }
-
-// export function getMovieDetail(id) {
-// 	return function(dispatch) {
-// 		return fetch(`http://www.omdbapi.com/?apikey=aa5c2844&i=${id}`)
-// 			.then( response => response.json() )
-// 			.then( json => dispatch( { type: 'GET_MOVIE_DETAIL', payload: json } ) );
-// 	};
-// }
-
-// export function addMovieFavorite(payload) {
-// 	return { type: 'ADD_MOVIE_FAVORITE', payload };
-// }
-
-// export function removeMovieFavorite(payload) {
-// 	return { type: 'REMOVE_MOVIE_FAVORITE', payload };
-// }
+export const cambio_de_paginado = (inicio_pagina) => {
+	return (dispatch) => dispatch({ type: 'CAMBIO_DE_PAGINADO', payload: inicio_pagina })
+}
 

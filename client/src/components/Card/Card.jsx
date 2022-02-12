@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useParams } from 'react-router-dom';
+// import { useDispatch, useSelector } from 'react-redux';
 
-import { DETALLE_POKEMON } from '../../actions/index';
+// import { DETALLE_POKEMON } from '../../actions/index';
 
 import './card.css';
-import imagenes from '../../assets/img/imagenes';
-import pokeLetras from '../../assets/img/pokemon text.png'
+// import imagenes from '../../assets/img/imagenes';
+// import pokeLetras from '../../assets/img/pokemon text.png'
 let imgNum = 18;
 
 export default function Card({pokemonDetail}) {

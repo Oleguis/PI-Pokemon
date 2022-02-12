@@ -1,8 +1,8 @@
 .CardsPrincipalContenedor {
     display: flex;
     align-items: center;
-    justify-content:center;
-    align-content: flex-end;
+    justify-content:space-evenly;
+    /* align-content:center; */
     flex-wrap: wrap;
     width: 100%;
     height: 100%;
@@ -10,21 +10,94 @@
 
 .pantalla {
     display: flex;
+    width: 100%;
     flex-direction: column;
     padding-bottom: 10px;
 }
 
-.botones {
+.divNewPokemon {
+    width: 5%;
+}
+
+.divFiltrado {
+    width: 25%;
+}
+.divNewPokemon div {
+    height: 15px;
+}
+.divFiltrado div {
+    height: 15px;
+}
+.botones{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content:space-evenly;
     align-items: center;
-    background-color: black;
+    background-color: rgb(184, 174, 174, 53%);
     width: 100%;
     height: 16%;
     color: white;
 }
 
-.paginado {
-    display: block;
+.divPaginado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 10%;
+}
+
+.divPaginado div:first-of-type {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+}
+
+.divPaginado div:last-of-type {
+    display: flex;
+    flex-direction: row;
+}
+button, select{
+    width: 30px;
+    height: 30px;
+    color: white;
+    border-radius: 20%;
+    margin: 2px;
+    border: 2px solid yellow;
+    background-color: royalblue;
+}
+
+select {
+    width: 40%;
+    border-radius: 5px;
+}
+.divNewPokemon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.divNewPokemon button {
+    width: 200px;
+    border-radius: 10px;
+}
+
+.divFiltrado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.divFiltrado button {
+    width: 200px;
+    border-radius: 10px;
+}
+
+
+.divPaginado button:focus {
+    background-color:tomato;
+}
+
+.divPaginado button:disabled {
+    background-color: gray;
+    opacity: 0.5;
 }

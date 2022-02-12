@@ -12,7 +12,8 @@ function sumChars(string){
 
 router.get('/', async (req, res, next) => {
     try {
-        
+        // console.log('\n---------- req ------------\n',req)
+        // console.log('\n---------- params ------------\n',req.params , '\n---------- body ------------\n',req.body, '\n---------- query ------------\n',req.query)
         if(req.query.name){
             let nombreRecibido = req.query.name.toLowerCase();
             let seekPokemondb = Pokemons.findOne({
@@ -29,7 +30,7 @@ router.get('/', async (req, res, next) => {
                 ]
             );
                 
-            console.log('\n------- datos inicio --------------\n',seekAll[0],'\n----------- datos fin ----------\n')
+            // console.log('\n------- datos inicio --------------\n',seekAll[0],'\n----------- datos fin ----------\n')
             
             if (!seekAll[0].value && seekAll[1].status == 'rejected') return res.status(404).send(`Error: Pokemon ${nombreRecibido} no se encuentra ni en la Base de Datos, ni en la pokemonApi`);
             if (seekAll[0].value){
@@ -71,11 +72,12 @@ router.get('/', async (req, res, next) => {
             }
         }
         let {offset, limit, llenar} = req.body;
+        // console.log(req.body);
         if (llenar == undefined) llenar = false;
         if (offset == undefined || typeof offset !== "number") offset = 0;
-        if (limit == undefined || typeof limit !== "number") limit = 40;
+        if (limit == undefined || typeof limit !== "number") limit = 90;
         const lista = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`)
-            .then(resp => resp.data.results);
+            .then(resp => resp.data.results).catch(error => next(error));
         const allPokemonsApi = await Promise.all(lista.map(ele => axios.get(ele.url)
             .then(async resp=>{
                     let newPokemon = {
@@ -121,7 +123,7 @@ router.get('/', async (req, res, next) => {
                     newPokemon.id = resp.data.id;
                     return newPokemon
                 }
-            ))
+            ).catch(error => next(error)))
         )
         let allPokemonsDb = [];
         const seekDataInDb = await Pokemons.findAll({include: Tipos})
@@ -159,115 +161,6 @@ router.get('/', async (req, res, next) => {
 });
 
 
-
-
-// router.get('/', async (req, res, next) => {
-//     try {
-//         // recupera data desde la api de Pokemon ------------------------------------------
-//         let {offset, limit, llenar} = req.body;
-//         if (llenar == undefined) llenar = false;
-//         if (offset == undefined || typeof offset !== "number") offset = 0;
-//         if (limit == undefined || typeof limit !== "number") limit = 40;
-//         let lista;
-//         if (!req.query.name){
-//             lista = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`)
-//                 .then(resp => resp.data.results);
-//         } else {
-//             lista = [{ url: `https://pokeapi.co/api/v2/pokemon/${req.query.name}`}] 
-//         }
-//         const allPokemonsApi = await Promise.all(lista.map(ele => axios.get(ele.url)
-//             .then(async resp=>{
-//                 let newPokemon = {
-                //     // id: resp.data.id,
-                //     nombre: resp.data.name,
-                //     altura : resp.data.height,
-                //     peso: resp.data.weight,
-                //     imagen: resp.data.sprites.front_default,
-                //     vida : resp.data.stats[0].base_stat,
-                //     fuerza : resp.data.stats[1].base_stat,
-                //     defensa : resp.data.stats[2].base_stat,
-                //     s_fuerza : resp.data.stats[3].base_stat,
-                //     s_defensa : resp.data.stats[4].base_stat,
-                //     velocidad : resp.data.stats[5].base_stat,
-                //     tiposids: (resp.data.types.length == 2 ?
-                //         [
-                //         parseInt(resp.data.types[0].type.url.slice(resp.data.types[0].type.url.lastIndexOf('/',resp.data.types[0].type.url.length - 2)+1).replace('/','')),
-                //         parseInt(resp.data.types[1].type.url.slice(resp.data.types[1].type.url.lastIndexOf('/',resp.data.types[1].type.url.length - 2)+1).replace('/','')),
-                //         ]
-                //         :
-                //         [
-                //         parseInt(resp.data.types[0].type.url.slice(resp.data.types[0].type.url.lastIndexOf('/',resp.data.types[0].type.url.length - 2)+1).replace('/','')),
-                //         ]),
-                //     tiposnames: resp.data.types.length == 2 ?
-                //         [
-                //         resp.data.types[0].type.name,
-                //         resp.data.types[1].type.name
-                //         ]
-                //         :
-                //         [
-                //         resp.data.types[0].type.name
-                //         ]
-                // }
-//                 if (llenar){
-//                     let pokemonAdd = await Pokemons.create(newPokemon)
-//                     await pokemonAdd.addTipos(newPokemon.tiposids)
-//                 }
-//                 newPokemon.id = resp.data.id;
-//                 return newPokemon
-//             })
-//             .catch(async error => {
-//                 let datos = await Pokemons.findOne({
-//                     where : { nombre : req.query.name},
-//                     include: Tipos
-//                 })
-//                 if (datos) res.send(datos)
-//                 res.status(400).send(`Error: Pokemon ${req.query.name} no se encuentra ni en la API ni en la Base de Datos`)
-//             })
-//         ));
-//         // recupera data desde la Base de Datos  ------------------------------------------
-//         let seekDataInDb;
-//         if (!req.query.name) seekDataInDb = await Pokemons.findAll({include: Tipos})
-//         else seekDataInDb = [await Pokemons.findOne({ where : {nombre: req.query.name}})]
-//         let allPokemonsDb = [];
-//         if (seekDataInDb[0] !== null || seekDataInDb.length > 1){
-//             allPokemonsDb = seekDataInDb.map((ele,ind) => {
-//                 return {
-//                         id : 'DB' + ele.dataValues.id, 
-//                         nombre: ele.dataValues.nombre, 
-//                         altura: ele.dataValues.altura, 
-//                         peso: ele.dataValues.peso, 
-//                         imagen: ele.dataValues.imagen, 
-//                         voda: ele.dataValues.vida, 
-//                         fuerza: ele.dataValues.fuerza,
-//                         defensa: ele.dataValues.defensa,
-//                         s_fuerza:ele.dataValues.s_fuerza,
-//                         s_defensa: ele.dataValues.s_defensa,
-//                         velocidad: ele.dataValues.velocidad,
-//                         tiposids: ele.dataValues.tipos.length == 2 ?
-//                         [
-//                             ele.dataValues.tipos[0].id,
-//                             ele.dataValues.tipos[1].id,                        
-//                         ] :
-//                         [
-//                             ele.dataValues.tipos[0].id,
-//                         ],
-//                         tiposnames: ele.dataValues.tipos.length == 2 ?
-//                         [
-//                             ele.dataValues.tipos[0].name,
-//                             ele.dataValues.tipos[1].name,                            
-//                         ] :
-//                         [
-//                             ele.dataValues.tipos[0].name,
-//                         ],
-//                 }})
-//         }else res.status(400).send(`Error: Pokemon ${req.query.name} no encontrado ni en la API ni en la Base de Datos`)
-//         console.log('\n-----------------\n', allPokemonsDb, '\n-----------------\n', allPokemonsApi, '\n-----------------\n')
-//         res.send(allPokemonsDb.concat(allPokemonsApi))
-//     } catch (error) {
-//         next(error)
-//     }
-// })                        
-            
 router.get('/:id', async (req, res, next)=>{
     try {
         let id = !req.params.id ? res.send('Error: debe ingresar un número de ID del pokemon a buscar') : req.params.id;
@@ -363,7 +256,7 @@ router.post('/', async (req, res, next)=>{
         if (!Object.keys(req.body).length) return res.status(400).send('Error. No se recibio información del Pokemon en el Body para agregar')
         const bodyObj = req.body;
         if (bodyObj.nombre == undefined || bodyObj.nombre == '') return res.status(400).send('Error. Nombre del pokemon no incluido. por favor incluya uno')
-        const seekPokemon = await Pokemons.findOne({where: {nombre: bodyObj.nombre}})
+        const seekPokemon = await Pokemons.findOne({where: {nombre: bodyObj.nombre.toLowerCase()}})
         if (seekPokemon) return res.status(400).json(`Error:. Pokemon ${bodyObj.nombre} ya existe en la base de datos`)
         const newPokemon = await Pokemons.create(bodyObj)
         await newPokemon.addTipos(bodyObj.tipos)
@@ -381,58 +274,38 @@ router.post('/', async (req, res, next)=>{
 
 router.put('/:pokemon', async (req, res, next)=>{
     try {
+        let pokemon = req.params.pokemon;
         if (!Object.keys(req.body).length) return res.status(400).send('Error. No se recibio información del Pokemon en el Body para actualizar');
-        let {pokemon} = req.params;
-        let nombre = req.body.nombre ? req.body.nombre : null;
-        let imagen = req.body.imagen ? req.body.imagen : null;
-        let altura = req.body.altura ? req.body.altura : null;
-        let peso = req.body.peso ? req.body.peso : null;
-        let vida = req.body.vida ? req.body.vida : null;
-        let fuerza = req.body.fuerza ? req.body.fuerza : null;
-        let defensa = req.body.defensa ? req.body.defensa : null;
-        let s_fuerza = req.body.s_fuerza ? req.body.s_fuerza : null;
-        let s_defensa = req.body.s_defensa ? req.body.s_defensa : null;
-        let velocidad = req.body.velocidad ? req.body.velocidad : null;
-        let tipos = req.body.tipos ? req.body.tipos : null;
-        if (nombre == '') return res.status(400).send('Error: Campo de nombre no puede estar vacio.') 
-        if (tipos) {
-            if (Array.isArray(tipos)){
-                let tiposCorectos = await Promise.all(tipos.map(tipo => Tipos.findByPk(tipo)));
+        let pkmonData = req.body;
+        if (pkmonData?.nombre && pkmonData?.nombre == '') return res.status(400).send('Error: Campo de nombre no puede estar vacio.') 
+        if (pkmonData.tipos) {
+            if (Array.isArray(pkmonData.tipos)){
+                let tiposCorectos = await Promise.all(pkmonData.tipos.map(tipo => Tipos.findByPk(tipo)));
                 if (!tiposCorectos[0]) return res.status(404).send('Error: Verifique que los tipos incluidos existan en la BD de tipos')
             }else return res.status(404).send('Error: Tipos debe contener un arreglo con los id de los tipos a remplazar')
         }
         let isById = false;
-        if (pokemon.replace(/[0-9]/g,'').toLowerCase() == "" ) res.status(404).send('Error: Número de Id invalido. Debe utilizar "DB", ejemplo "DB10"')
+        if (pokemon.replace(/[0-9]/g,'') == "" ) res.status(404).send('Error: Número de Id invalido. Debe utilizar "DB", ejemplo "DB10"')
         if (pokemon.replace(/[0-9]/g,'').toLowerCase() == "db" ){
             isById = true;
             pokemon = pokemon.replace(/db/gi,'')
         }
 
-        let newData = {};
-        if (nombre) newData.nombre = nombre;
-        if (imagen) newData.imagen = imagen;
-        if (altura) newData.altura = altura;
-        if (peso) newData.peso = peso;
-        if (vida) newData.vida = vida;
-        if (fuerza) newData.fuerza = fuerza;
-        if (defensa) newData.defensa = defensa;
-        if (s_fuerza) newData.s_fuerza = s_fuerza;
-        if (s_defensa) newData.s_defensa = s_defensa;
-        if (velocidad) newData.velocidad = velocidad;
-        if (tipos) newData.tipos = tipos;    
-
-        let registro = await Pokemons.update(newData, isById ? {
-                where : { id : pokemon},
-                include: Tipos
-            }:
-            {
-                where : { nombre : pokemon},
-                include: Tipos
-            }
-        )
+        let registro = isById ? await Pokemons.findByPk(pokemon) : await Pokemons.findOne({where: {nombre: pokemon}, includes: Tipos})
         if (!registro) return res.status(404).send(`Error: Pokemon ${pokemon} no encontrado en la Base de Datos. Cambios no realizados..`)
-        await registro.addTipos(tipos);
-        res.send(`Registro actualizado con éxito. Número de registros actualizados: ${registro}.`)
+        if (pkmonData?.nombre) registro.nombre = pkmonData.nombre;
+        if (pkmonData?.imagen) registro.imagen = pkmonData.imagen;
+        if (pkmonData?.altura) registro.altura = pkmonData.altura;
+        if (pkmonData?.peso) registro.peso = pkmonData.peso;
+        if (pkmonData?.vida) registro.vida = pkmonData.vida;
+        if (pkmonData?.fuerza) registro.fuerza = pkmonData.fuerza;
+        if (pkmonData?.defensa) registro.defensa = pkmonData.defensa;
+        if (pkmonData?.s_fuerza) registro.s_fuerza = pkmonData.s_fuerza;
+        if (pkmonData?.s_defensa) registro.s_defensa = pkmonData.s_defensa;
+        if (pkmonData?.velocidad) registro.velocidad = pkmonData.velocidad;
+        if (pkmonData?.tipos) await registro.setTipos(pkmonData.tipos);
+        await registro.save();
+        res.send(`Registro actualizado con éxito. ${registro}.`)
     } catch (error) {
         next(error);
     }

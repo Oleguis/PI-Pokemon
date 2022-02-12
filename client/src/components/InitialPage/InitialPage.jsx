@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
+// import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './initialPage.css';
 import Loading from '../Loading/Loading';
 import pokeLetras from '../../assets/img/pokemon text.png'
-import APP from '../../App'
+// import APP from '../../App'
 
 export default function InitialPage () {
   const entrada = useSelector(store => store.entrada);

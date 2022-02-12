@@ -1,21 +1,23 @@
 import React, { useEffect } from 'react';
-import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+// import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import NavBar from './components/NavBar/NavBar';
-import Cards from './components/Cards/Cards'
+import Cards from './components/Cards/Cards';
 import InitialPage from './components/InitialPage/InitialPage'
-import {buscar_pokemones} from './actions/index'
-
+import {buscar_pokemones, buscar_tipos, loadind_Data} from './actions/index'
+// let contador = 0;
 function App() {
-  const {entrada, pokemonList} = useSelector(store => store);
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const {entrada, loadind } = useSelector(store => store);
 
-  useEffect(() => { 
-		dispatch(buscar_pokemones());
+	useEffect(() => {
+    // dispatch(loadind_Data(true))
+    dispatch(buscar_tipos())
+    dispatch(buscar_pokemones(0,90,true))
+    // dispatch(loadind_Data(false))
 	}, []);
 
-  
     return (
       <>
         { entrada ?
@@ -28,7 +30,7 @@ function App() {
               <NavBar />
             </div>
             <div className='contenedorCards'>
-              <Cards />         
+              <Cards />
             </div>
           </div>
         }

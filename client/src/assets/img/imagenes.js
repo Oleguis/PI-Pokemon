@@ -19,7 +19,7 @@ import img18 from './allpokemon8.jpg';
 import img19 from './allpokemon9.png';
 import img20 from './allpokemon9.png';
 
-export default [
+const imagenes = [
     {"img": img1, "alt": "Imagen 1"},
     {"img": img2, "alt": "Imagen 2"},
     {"img": img3, "alt": "Imagen 3"},
@@ -41,3 +41,7 @@ export default [
     {"img": img19, "alt": "Imagen 19"},
     {"img": img20, "alt": "Imagen 20"},
 ];
+
+export {
+    imagenes,
+}
