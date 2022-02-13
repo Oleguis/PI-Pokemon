@@ -1,12 +1,10 @@
 import React from "react";
 import './loading.css'
 
-export default function Loading({movible, centro}) {
+export default function Loading(props) {
     
-    let pokeBall = movible ? 'pokeBall rotateBall' : 'pokeBall';
-    if (centro) pokeBall += ' centro';
-
-    // let pokeTamaño = tamaño ? tamaño : '3'    
+    let pokeBall = props.movible ? 'pokeBall rotateBall' : 'pokeBall'; 
+    // let pokeTamaño = props.tamaño ? props.tamaño : '3'    
     return (
         <div className={pokeBall} > 
             <div className="centraLine"></div>

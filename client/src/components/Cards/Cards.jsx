@@ -31,6 +31,10 @@ export default function Cards() {
 			setbtns([ btns[0] + 1, btns[1] + 1, btns[2] + 1]);
 		} else setprimeraCard((e.target.innerText - 1) * maximoNrodeCard)
 	}
+
+	useEffect(() => {
+		if (pokemonsList.length > 0) dispatch({ type: 'LOADING_DATA', payload: false })
+	}, [pokemonsList]);
 	
 	return (
 		<div className='pantalla'>

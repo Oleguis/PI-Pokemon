@@ -8,8 +8,8 @@ const initialState = {
         imagenes: [],
         entrada: true,
         order: 'asendente',
+        leyendo: false,
         filter: {status: false, modo: 0, filtros: [] },
-        loading: false,
 };
 
 
@@ -21,11 +21,11 @@ export default function rootReducer(state = initialState, action){
                 ...state,
                 tipos: action.payload
             }               
-        case 'LOADIND_DATA':
-            console.log(action.payload)
+        case 'LOADING_DATA':
+
             return {
                 ...state,
-                loading: action.payload
+                leyendo: action.payload
             }
         case 'BUSCAR_POKEMONES':
             return {

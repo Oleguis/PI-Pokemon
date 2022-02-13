@@ -14,16 +14,9 @@
     border: 0.3rem solid black;
 }
 
-.cetro {
-    position: absolute;
-    top:50%;
-    left:50%
-}
-
 .pokeBall:hover {
     animation-direction: reverse;
 }
-
 .rotateBall {
     animation: rotate 1s linear infinite;
 }

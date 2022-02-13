@@ -9,13 +9,12 @@ import {buscar_pokemones, buscar_tipos, loadind_Data} from './actions/index'
 // let contador = 0;
 function App() {
   const dispatch = useDispatch();
-  const {entrada, loadind } = useSelector(store => store);
+  const {entrada, leyendo } = useSelector(store => store);
 
 	useEffect(() => {
-    // dispatch(loadind_Data(true))
+    dispatch({ type: 'LOADING_DATA', payload: true })
     dispatch(buscar_tipos())
-    dispatch(buscar_pokemones(0,90,true))
-    // dispatch(loadind_Data(false))
+    dispatch(buscar_pokemones(0,150,false))
 	}, []);
 
     return (

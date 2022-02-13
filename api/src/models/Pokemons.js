@@ -13,13 +13,6 @@ module.exports = (sequelize) => {
       index: true,
     },
 
-    // id: {
-    //   type: DataTypes.VIRTUAL,
-    //   get() {
-    //     return `DB${this.db_id}`;
-    //   },
-    // },
-
     nombre: {
       type: DataTypes.STRING(30),
       allowNull: false,

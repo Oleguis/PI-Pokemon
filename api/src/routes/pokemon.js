@@ -72,57 +72,57 @@ router.get('/', async (req, res, next) => {
         let {offset, limit, llenar} = req.body;
         // console.log(req.body);
         if (llenar == undefined) llenar = false;
-        if (offset == undefined || typeof offset !== "number") offset = 0;
-        if (limit == undefined || typeof limit !== "number") limit = 90;
+        if (offset == undefined || typeof offset !== "number") offset = 500;
+        if (limit == undefined || typeof limit !== "number") limit = 200;
         const lista = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`)
-            .then(resp => resp.data.results).catch(error => next(error));
-        const allPokemonsApi = await Promise.all(lista.map(ele => axios.get(ele.url)
-            .then(async resp=>{
-                    let newPokemon = {
-                        // id: resp.data.id,
-                        nombre: resp.data.name,
-                        altura : resp.data.height,
-                        peso: resp.data.weight,
-                        imagen: resp.data.sprites.front_default,
-                        vida : resp.data.stats[0].base_stat,
-                        fuerza : resp.data.stats[1].base_stat,
-                        defensa : resp.data.stats[2].base_stat,
-                        s_fuerza : resp.data.stats[3].base_stat,
-                        s_defensa : resp.data.stats[4].base_stat,
-                        velocidad : resp.data.stats[5].base_stat,
-                        tipos: resp.data.types.length == 2 ?   // if
-                            [{
-                                id: parseInt(resp.data.types[0].type.url.slice(resp.data.types[0].type.url.lastIndexOf('/',resp.data.types[0].type.url.length - 2)+1).replace('/','')),
-                                name: resp.data.types[0].type.name 
-                            },
-                            {
-                                id : parseInt(resp.data.types[1].type.url.slice(resp.data.types[1].type.url.lastIndexOf('/',resp.data.types[1].type.url.length - 2)+1).replace('/','')),
-                                name: resp.data.types[1].type.name
-                            }]
-                            :  //else
-                            [{
-                                id: parseInt(resp.data.types[0].type.url.slice(resp.data.types[0].type.url.lastIndexOf('/',resp.data.types[0].type.url.length - 2)+1).replace('/','')),
-                                name: resp.data.types[0].type.name 
-                            }],
-                        tiposids: (resp.data.types.length == 2 ?
-                            [
-                            parseInt(resp.data.types[0].type.url.slice(resp.data.types[0].type.url.lastIndexOf('/',resp.data.types[0].type.url.length - 2)+1).replace('/','')),
-                            parseInt(resp.data.types[1].type.url.slice(resp.data.types[1].type.url.lastIndexOf('/',resp.data.types[1].type.url.length - 2)+1).replace('/','')),
-                            ]
-                            :
-                            [
-                            parseInt(resp.data.types[0].type.url.slice(resp.data.types[0].type.url.lastIndexOf('/',resp.data.types[0].type.url.length - 2)+1).replace('/','')),
-                            ])
-                    }
-                    if (llenar){
-                        let pokemonAdd = await Pokemons.create(newPokemon)
-                        await pokemonAdd.addTipos(newPokemon.tiposids)
-                    }
-                    newPokemon.id = resp.data.id;
-                    return newPokemon
+        const todosPokemonsApi = await Promise.allSettled(lista.data.results.map(ele => axios.get(ele.url)))
+        console.log(todosPokemonsApi)
+        let allPokemonsApi = [];
+        todosPokemonsApi.forEach( async resp => {
+            if (resp.status === 'fulfilled') {
+                let newPokemon = {
+                    id: resp.value.data.id,
+                    nombre: resp.value.data.name,
+                    altura : resp.value.data.height,
+                    peso: resp.value.data.weight,
+                    imagen: resp.value.data.sprites.front_default,
+                    vida : resp.value.data.stats[0].base_stat,
+                    fuerza : resp.value.data.stats[1].base_stat,
+                    defensa : resp.value.data.stats[2].base_stat,
+                    s_fuerza : resp.value.data.stats[3].base_stat,
+                    s_defensa : resp.value.data.stats[4].base_stat,
+                    velocidad : resp.value.data.stats[5].base_stat,
+                    tipos: resp.value.data.types.length == 2 ?   // if
+                        [{
+                            id: parseInt(resp.value.data.types[0].type.url.slice(resp.value.data.types[0].type.url.lastIndexOf('/',resp.value.data.types[0].type.url.length - 2)+1).replace('/','')),
+                            name: resp.value.data.types[0].type.name 
+                        },
+                        {
+                            id : parseInt(resp.value.data.types[1].type.url.slice(resp.value.data.types[1].type.url.lastIndexOf('/',resp.value.data.types[1].type.url.length - 2)+1).replace('/','')),
+                            name: resp.value.data.types[1].type.name
+                        }]
+                        :  //else
+                        [{
+                            id: parseInt(resp.value.data.types[0].type.url.slice(resp.value.data.types[0].type.url.lastIndexOf('/',resp.value.data.types[0].type.url.length - 2)+1).replace('/','')),
+                            name: resp.value.data.types[0].type.name 
+                        }],
+                    tiposids: (resp.value.data.types.length == 2 ?
+                        [
+                        parseInt(resp.value.data.types[0].type.url.slice(resp.value.data.types[0].type.url.lastIndexOf('/',resp.value.data.types[0].type.url.length - 2)+1).replace('/','')),
+                        parseInt(resp.value.data.types[1].type.url.slice(resp.value.data.types[1].type.url.lastIndexOf('/',resp.value.data.types[1].type.url.length - 2)+1).replace('/','')),
+                        ]
+                        :
+                        [
+                        parseInt(resp.value.data.types[0].type.url.slice(resp.value.data.types[0].type.url.lastIndexOf('/',resp.value.data.types[0].type.url.length - 2)+1).replace('/','')),
+                        ])
                 }
-            ).catch(error => next(error)))
-        )
+                allPokemonsApi.push(newPokemon)
+                if (llenar){
+                    let pokemonAdd = await Pokemons.create(newPokemon)
+                    await pokemonAdd.addTipos(newPokemon.tiposids)
+                }
+            }
+        })
         let allPokemonsDb = [];
         const seekDataInDb = await Pokemons.findAll({include: Tipos})
         if (seekDataInDb[0] !== null || seekDataInDb.length > 1){

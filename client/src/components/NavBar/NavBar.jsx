@@ -7,20 +7,16 @@ import './navBar.css';
 
 
 function Nav({onSearch}) {
-  const loading = useSelector(store => store.loading)
-  let leyendo;
-  if (loading) leyendo = <Loading movible={true} tamaño={'2'}/>
-  else leyendo = <Loading movible={false} tamaño={'2'}/>
-
-
+  const leyendo = useSelector(store => store.leyendo)
+  let readingData;
   return (
     <nav className="navbarDiv">
         <Link to='/' className='linkDiv'>
             <span className="navbarSpan">
                 <div>
-                    {leyendo}
+                <Loading movible={leyendo} centro={true} tamaño={'2'}/>
                 </div>
-                Proyecto Individual PokeApi
+                {leyendo ? 'Leyendo data de la API' : 'Proyecto Individual PokeApi'}
             </span>
         </Link>
         <SearchBar className='navbarSearch' onSearch={onSearch} />

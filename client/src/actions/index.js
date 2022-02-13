@@ -14,6 +14,7 @@ export const ELIMINAR_POKEMON = 'eliminar_pokemon'
 
 export const loadind_Data = (estado) => {
 	return (dispatch) => {
+		console.log('entró')
 		return dispatch({ type: 'LOADING_DATA', payload: estado })
 	}
 }
