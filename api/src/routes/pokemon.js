@@ -28,7 +28,6 @@ router.get('/', async (req, res, next) => {
                 ]
             );
                 
-            // console.log('\n------- datos inicio --------------\n',seekAll[0],'\n----------- datos fin ----------\n')
             
             if (!seekAll[0].value && seekAll[1].status == 'rejected') return res.status(404).send(`Error: Pokemon ${nombreRecibido} no se encuentra ni en la Base de Datos, ni en la pokemonApi`);
             if (seekAll[0].value){
@@ -70,13 +69,11 @@ router.get('/', async (req, res, next) => {
             }
         }
         let {offset, limit, llenar} = req.body;
-        // console.log(req.body);
         if (llenar == undefined) llenar = false;
-        if (offset == undefined || typeof offset !== "number") offset = 500;
-        if (limit == undefined || typeof limit !== "number") limit = 200;
+        if (offset == undefined || typeof offset !== "number") offset = 0;
+        if (limit == undefined || typeof limit !== "number") limit = 70;
         const lista = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`)
         const todosPokemonsApi = await Promise.allSettled(lista.data.results.map(ele => axios.get(ele.url)))
-        console.log(todosPokemonsApi)
         let allPokemonsApi = [];
         todosPokemonsApi.forEach( async resp => {
             if (resp.status === 'fulfilled') {

@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const { Tipos } = require('../db')
 const router = Router();
+
 const axios = require('axios');
 
 
