@@ -1,6 +1,6 @@
 .navbarDiv {
     display: flex;
-    background-color: royalblue;
+    background-color: #4169e133;
     color: white;
     justify-content:space-between;
     align-items: center;
@@ -13,11 +13,21 @@
     width: 100%;
     align-items: center;
     color: yellow;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: bold;
+}
+
+.linkDiv, .linkNewPokemon {
     text-decoration: none;
 }
 
-.linkDiv {
-    text-decoration: none;
+.linkNewPokemon {
+    color: blue;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.linkNewPokemon:hover {
+    color: yellow;
+    text-shadow: 2px 2px blue;
 }

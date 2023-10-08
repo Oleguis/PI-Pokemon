@@ -14,7 +14,6 @@ export const ELIMINAR_POKEMON = 'eliminar_pokemon'
 
 export const loadind_Data = (estado) => {
 	return (dispatch) => {
-		console.log('entró')
 		return dispatch({ type: 'LOADING_DATA', payload: estado })
 	}
 }
@@ -23,7 +22,18 @@ export const loadind_Data = (estado) => {
 export const buscar_pokemones = (offset=0,limit=40,llenar=false) => {
 	return async (dispatch) => {
 		try {
-			const lista = await axios.get(`http://localhost:3001/api/pokemon`, { data: {offset, limit, llenar}});
+			const lista = await axios({
+				url: 'http://localhost:3001/api/pokemon',
+				method: 'get',
+				headers: {
+					data: JSON.stringify({
+						offset,
+						limit,
+						llenar
+					})
+				}
+			})
+			// .get(`http://localhost:3001/api/pokemon`, { data: {offset, limit, llenar}});
 			return dispatch({ type: 'BUSCAR_POKEMONES', payload: lista.data });				
 		} catch (error) {
 				alert(error);
@@ -52,6 +62,12 @@ export const buscar_tipos = () => {
 		} catch (error) {
 			alert(error);
 		}
+	}
+}
+
+export const actualizar_filter_tipos = (tiposChange) => {
+	return (dispatch) => {
+		return dispatch({ type: 'BUSCAR_TIPOS', payload: tiposChange })
 	}
 }
 

@@ -1,12 +1,12 @@
 // import React, {useState, useEffect} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import './initialPage.css';
-import Loading from '../Loading/Loading';
+import Pokeball from '../Pokeball/Pokeball';
 import pokeLetras from '../../assets/img/pokemon text.png'
 // import APP from '../../App'
 
 export default function InitialPage () {
-  const entrada = useSelector(store => store.entrada);
+  // const entrada = useSelector(store => store.entrada);
   const dispatch = useDispatch();
     return (
       <>
@@ -16,7 +16,7 @@ export default function InitialPage () {
               <h1>Elaborado por</h1>
               <h3>Jorge Nuñez</h3>
             </div>
-            <Loading movible={true}/>
+            <Pokeball movible={true}/>
             <img onClick={()=>dispatch({type: 'PAGINA_PRINCIPAL', payload: false})} className='pokeLetras' src={pokeLetras} alt="pokeletras" />
             <h1 className='message'>Presiona en la palabra Pokemon para entrar</h1>
       </>

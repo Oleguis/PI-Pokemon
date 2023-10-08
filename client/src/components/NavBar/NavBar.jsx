@@ -1,27 +1,27 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import {Link} from 'react-router-dom'
-import Loading from '../Loading/Loading';
+import Pokeball from '../Pokeball/Pokeball.jsx';
 import SearchBar from '../Searchs/Search';
 import './navBar.css';
 
 
 function Nav({onSearch}) {
-  const leyendo = useSelector(store => store.leyendo)
-  let readingData;
+  // let readingData;
   return (
     <nav className="navbarDiv">
-        <Link to='/' className='linkDiv'>
+        <Link className='linkDiv' to='/'>
             <span className="navbarSpan">
                 <div>
-                <Loading movible={leyendo} centro={true} tamaño={'2'}/>
+                  <Pokeball movible={false} centro={true} tamaño={'2'}/>
                 </div>
-                {leyendo ? 'Leyendo data de la API' : 'Proyecto Individual PokeApi'}
+                Proyecto Individual PokeApi
             </span>
         </Link>
+        <Link to='/newPokemon' className='linkNewPokemon'>Crear nuevo Pokemon</Link>
         <SearchBar className='navbarSearch' onSearch={onSearch} />
     </nav>
   );
 };
 
 export default Nav;
+

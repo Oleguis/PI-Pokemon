@@ -6,6 +6,20 @@
     flex-wrap: wrap;
     width: 100%;
     height: 100%;
+    /* overflow-y: auto; */
+}
+
+.CardsPrincipalContenedor::-webkit-scrollbar {
+    width: 7px;
+    background-color: aqua;
+}
+
+.CardsPrincipalContenedor::-webkit-scrollbar-button:decrement {
+    background-color: royalblue;
+}
+
+.CardsPrincipalContenedor::-webkit-scrollbar-button:increment {
+    background-color: blue;
 }
 
 .pantalla {
@@ -15,28 +29,15 @@
     padding-bottom: 10px;
 }
 
-.divNewPokemon {
-    width: 5%;
-}
-
-.divFiltrado {
-    width: 25%;
-}
-.divNewPokemon div {
-    height: 15px;
-}
-.divFiltrado div {
-    height: 15px;
-}
 .botones{
     display: flex;
     flex-direction: row;
     justify-content:space-evenly;
     align-items: center;
-    background-color: rgb(184, 174, 174, 53%);
+    background-color: transparent/*rgb(184, 174, 174, 53%)*/;
     width: 100%;
-    height: 16%;
-    color: white;
+    height: 12%;
+    color: yellow;
 }
 
 .divPaginado {
@@ -57,41 +58,16 @@
     display: flex;
     flex-direction: row;
 }
-button, select{
+button {
+    font-weight: bold;
     width: 30px;
     height: 30px;
-    color: white;
+    color: yellow;
     border-radius: 20%;
     margin: 2px;
     border: 2px solid yellow;
     background-color: royalblue;
 }
-
-select {
-    width: 40%;
-    border-radius: 5px;
-}
-.divNewPokemon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.divNewPokemon button {
-    width: 200px;
-    border-radius: 10px;
-}
-
-.divFiltrado {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.divFiltrado button {
-    width: 200px;
-    border-radius: 10px;
-}
-
 
 .divPaginado button:focus {
     background-color:tomato;
@@ -100,4 +76,96 @@ select {
 .divPaginado button:disabled {
     background-color: gray;
     opacity: 0.5;
+}
+
+.divBotondespliegamenu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    align-items: stretch;
+    top: 75px;
+    left: 10px;
+    width: 25px;
+    height: 23px;
+    background-color:royalblue;
+    justify-content: center;
+    padding: 0 3px;
+    border-radius: 5px;
+    border: 2px solid yellow;
+}
+    
+.divBotondespliegamenu:hover {
+    box-shadow: 0px 0px 0px 2px #00000099;
+}
+.despliegaMenuLine {
+    display: flex;
+    background-color: yellow;
+    width: 100%;
+    height: 3px;
+    margin: 1.4px 0;
+}
+
+.divMenu {
+    display: flex;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    top: 105px;
+    left: 0px;
+    width: 245px;
+    height: auto;
+    background: #000000 url(../../assets/img/allpokemon1.jpg);
+    background-size:cover;
+    background-position: center;
+    opacity: 0.99;
+    z-index: 20;
+    transition: width 0.9s;
+    border: 2px solid royalblue;
+    min-height: 20vh;
+}
+
+.divOverMenu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background: #48d1cc99;
+}
+
+/* .divOverMenu.ocultarMenu {
+    display: none;
+} */
+
+.ocultarMenu {
+    width: 0;
+}
+
+#Id {
+    background-color: Darkcyan;
+    color: yellow;
+    font-size: 1.5rem;
+}
+
+.Caracteristicas {
+    color: yellow;
+}
+
+.divMenusOptions {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 20%;
+    border: 2px solid white;
+    /* justify-content: center; */
+}
+
+.textH4 {
+    width: 100%;
+    height: 22px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: black;
+    font-family:Arial, Helvetica, sans-serif;
+    background-color: #ffffff99;
 }

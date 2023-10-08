@@ -1,0 +1,231 @@
+.divCrearPokemon {
+    display: flex;
+    position: absolute;
+    top: 71px;
+    left: 0px;
+    width: 100%;
+    height: 88vh;
+    z-index: 200;
+    background-position: center;
+    background-size:cover;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.divCrearPokemonOver {
+    display: flex;
+    width: 85%;
+    height: 95%;
+    background-color: #00000099;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+.divCrearPokemonBoton {
+    display: flex;
+    width: 100%;
+    height: 10%;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff99;
+    border-radius: 0px 0px 10px 0px;
+}
+.divInputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff99;
+    width: 70%;
+    height: 100%;
+    max-width: 600px;
+    border-radius: 10px 0px 0px 10px;
+}
+
+.divInputs>h1{
+    margin: 0px;
+    padding-bottom: 15px;
+}
+
+.divCreatePkmInputs {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    border-radius: 10px;
+}
+
+.divTypeText{
+    margin-bottom: 10px;
+}
+
+.divCreatePkmInputs label{
+    display: flex;
+    width: 98%;
+    margin-left: 5px;
+    font-weight: bold;
+    font-size: small;
+    justify-content: space-between;
+}
+
+.divCreatePkmInputs label>p{
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+    font-size: small;
+    color: red;
+}
+.divCreatePkmInputs input{
+    display: flex;
+    width: 100%;
+}
+
+.divCrearPokemonPictureyTipos {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 100%;
+}
+
+.divCrearPokemonPhoto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 25%;
+    background-color: #ffffff99;
+    border-radius: 0px 10px 0px 0px;
+}
+
+.divTypes {
+    display: grid;
+    grid-template-columns: 46% 46%;
+    column-gap: 5px;
+    width: 100%;
+    height: 65%;
+    background-color: #ffffff99;
+    align-content: space-between;
+    justify-content:flex-start;
+    padding-bottom: 15px;
+}
+
+.formCrearPokemon {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.imgTypes {
+    display: grid;
+    background: transparent;
+}
+
+.pTypes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 3px;
+    font-family:'showcard gotic';
+    font-size: large;
+    font-weight: bold;
+    color: black; 
+    border: 3px solid #00000099;
+    vertical-align: bottom;
+    background-color: var(--scolor);
+    text-align: center;
+    border-radius: 10px;
+    width:75px;
+    height: auto;
+}
+
+.pTypes:hover {
+    color: var(--scolor);
+    background-color: royalblue;
+    border: 3px solid var(--dcolor);
+}
+
+.h1Types {
+    margin: 0 auto;
+    grid-column: 1/-1;
+}
+
+.divTiposPkm {
+    display: flex;
+}
+
+.sinTipos {
+    font-size: 12px;
+    width: 380px;
+}
+
+.botonSubmit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 30px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.botonSubmit:hover {
+    background-color: blue;
+    color: yellow;
+    border-color: yellow;
+}
+
+.imagenNuevoPokemon {
+    width: 70%;
+    height: 80%;
+    border-radius: 50%;
+    border: 1px solid yellow;
+}
+
+.divOverlayModal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #00000077;
+}
+
+.divPpalModal {
+    display: flex;
+    flex-direction: column;
+    width:auto;
+    height:min-content;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 5px;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0px 0px 0px 10px #ffffff99;
+}
+
+.divPpalModal>h4 {
+    padding: 0;
+    margin: 0;
+    text-align:start;
+}
+.botonCerrarModal {
+    display: flex;
+    position: relative;
+    width:100px;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    margin: 10px 0px 0px 0px;
+    border-radius: 5px;
+    font-size: x-small;
+}

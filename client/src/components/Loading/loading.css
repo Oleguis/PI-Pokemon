@@ -2,7 +2,32 @@
     --size: 3rem;
 }
 
-.pokeBall {
+.divLoadingPpal {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0%;
+    left:0%;
+    width: 98vw;
+    height: 97vh;
+    background-color: transparent;
+}
+
+.divLoaddingSecond {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: 20%;
+    background-color: #00000077;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    border: 2px solid yellow
+}
+
+.pokeBall_l {
     display: flex;
     width: var(--size);
     height: var(--size);
@@ -11,20 +36,20 @@
     justify-content: center;
     align-items: center;
     margin: 5px 5px;
-    border: 0.3rem solid black;
+    border: 0.1rem solid black;
 }
 
-.cetro {
+.cetro_l {
     position: absolute;
     top:50%;
     left:50%
 }
 
-.pokeBall:hover {
+.pokeBall_l:hover {
     animation-direction: reverse;
 }
 
-.rotateBall {
+.rotateBall_l {
     animation: rotate 1s linear infinite;
 }
 
@@ -34,7 +59,7 @@
     to {transform: rotate(360deg);}
 } 
 
-.centraLine {
+.centraLine_l {
     display: flex;
     background-color: black;
     width: 100%;
@@ -42,7 +67,7 @@
 
 }
 
-.centralCircle1 {
+.centralCircle1_l {
     display: flex;
     position: absolute;
     background-color: black;
@@ -51,11 +76,47 @@
     border-radius: 50%;
 }
 
-.centralCircle2 {
+.centralCircle2_l {
     display: flex;
     position: absolute;
     background-color: white;
     width:  0.5rem /*calc(var(--size) / 5rem)*/;
     height: 0.5rem /*calc(var(--size) / 5rem)*/;
     border-radius: 50%;
+}
+
+.divLoading {
+    width: 100%;
+    height: 10px;
+    background-color: blue;
+    animation: recorrido 1.5s ease-in-out infinite;
+}
+
+@keyframes recorrido {
+        0%   { width:0%;}
+        10%   { width:10%;}
+        20%   { width:20%;}
+        30%   { width:30%;}
+        40%   { width:40%;}
+        50%   { width:50%;}
+        60%   { width:60%;}
+        70%   { width:70%;}
+        80%   { width:80%;}
+        90%   { width:90%;}
+        100%   { width:100%;}
+}
+
+.divMensajeLeyendo {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    /* background-color: #a52a2a99; */
+}
+
+.divMensajeLeyendo h3 {
+    padding: 0;
+    margin: 10px auto;
 }

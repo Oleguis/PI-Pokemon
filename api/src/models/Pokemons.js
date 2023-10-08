@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize')
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
@@ -10,56 +10,56 @@ module.exports = (sequelize) => {
       unique: true,
       autoIncrement: true,
       primaryKey: true,
-      index: true,
+      index: true
     },
 
     nombre: {
       type: DataTypes.STRING(30),
       allowNull: false,
-      set(value) {
-        this.setDataValue('nombre', value.toLowerCase());
+      set (value) {
+        this.setDataValue('nombre', value.toLowerCase())
       }
     },
 
     imagen: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
 
     vida: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER
     },
 
     fuerza: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER
     },
 
     defensa: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER
     },
 
     s_fuerza: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER
     },
 
     s_defensa: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER
     },
 
     velocidad: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER
     },
 
     altura: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.FLOAT
     },
 
     peso: {
-      type: DataTypes.FLOAT,
-    },
-  }, 
+      type: DataTypes.FLOAT
+    }
+  },
   {
     timestamps: false,
     createdAt: false,
     updatedAt: false
-  });
-};
+  })
+}

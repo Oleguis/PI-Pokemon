@@ -1,0 +1,110 @@
+.accordion {
+    box-sizing: border-box;
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+    width: 100%;
+}
+
+.accordion-select {
+    cursor: pointer;
+    margin: 0;
+    opacity: 0;
+    z-index: 1;
+}
+
+.accordion-title {
+    position: relative;
+}
+
+.accordion-title:not(:nth-last-child(2))::after {
+    border: 1px solid transparent;
+    bottom: 0;
+    content: '';
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.accordion-title span {
+    bottom: 0px;
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.accordion-content {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: auto;
+    position: relative;
+    transition: margin 0.3s ease 0.1s;
+}
+
+.accordion-select:checked + .accordion-title + .accordion-content {
+    margin-bottom: 0;
+    margin-right: 0;
+}
+
+/* Generated styles starts here */
+
+.accordion {
+    border-color: #a12a2a;
+    border-radius: 8px;
+    border-style: solid;
+    border-width: 2px;
+    flex-direction: column;
+    height: auto;
+} 
+
+.accordion-title,
+.accordion-select  {
+    background-color: #ed2945;
+    color: #ffffff;
+    width: 100%;
+    height: 34px;
+    font-size: 18px;
+}
+
+.accordion-select {
+    margin-bottom: -34px;
+    margin-right: -34px;
+}
+
+.accordion-title:not(:nth-last-child(2))::after {
+    border-bottom-color: rgb(182, 42, 42);
+    border-right-color: transparent;
+} 
+
+.accordion-select:hover + .accordion-title,
+.accordion-select:checked + .accordion-title {
+    background-color: #c22439;
+}
+
+ .accordion-title span  {	
+    transform: rotate(0deg);
+    /* -ms-writing-mode: lr-tb; */
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
+    padding-left: 17px;
+    padding-right: 17px;
+    line-height: 34px;
+} 
+
+.accordion-content {
+    background-color: #ffffff;
+    color: #c22439;
+    height: 400px;
+    margin-bottom: -400px;
+    margin-right: 0;
+    padding: 10px;
+    width: 100%;
+}
+
+.lbActiva {
+    font-weight: bold;
+    color: red
+}
